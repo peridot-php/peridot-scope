@@ -12,6 +12,12 @@ Extracted from the [Peridot](http://peridot-php.github.io/) testing framework.
 
 ##Usage
 
+We recommend installing this package via composer:
+
+```
+$ composer require peridot-php/peridot-scope:~1.0
+```
+
 ###Creating a Scope
 
 ```php
