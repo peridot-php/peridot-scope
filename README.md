@@ -5,7 +5,7 @@ Peridot Scope
 
 Peridot [Scope](https://github.com/peridot-php/peridot/wiki/Scopes).
 
-Scopes allow safe binding of states for closures and offers a mechanism
+Scopes allow safe binding of state for closures and offers a mechanism
 for mixing state and behavior in via [child scopes](https://github.com/peridot-php/peridot/wiki/Scopes#extending-functionality-with-scopes).
 
 Extracted from the [Peridot](http://peridot-php.github.io/) testing framework.
