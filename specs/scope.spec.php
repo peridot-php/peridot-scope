@@ -18,6 +18,12 @@ describe('Scope', function() {
             $name = $this->scope->name;
             assert($name == "brian", "property should return value");
         });
+
+        it('should set the parent scope property on child', function() {
+            $test = new TestScope();
+            $this->scope->peridotAddChildScope($test);
+            assert($test->peridotGetParentScope() === $this->scope, "should have set parent scope");
+        });
     });
 
     describe('->peridotBindTo()', function() {
