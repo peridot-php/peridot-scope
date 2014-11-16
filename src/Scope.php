@@ -19,11 +19,34 @@ class Scope
     protected $peridotChildScopes;
 
     /**
+     * @var Scope
+     */
+    protected $peridotParentScope;
+
+    /**
      * @param Scope $scope
      */
     public function peridotAddChildScope(Scope $scope)
     {
+        $scope->peridotSetParentScope($this);
         $this->peridotGetChildScopes()->attach($scope);
+    }
+
+    /**
+     * @return Scope
+     */
+    public function peridotGetParentScope()
+    {
+        return $this->peridotParentScope;
+    }
+
+    /**
+     * @param Scope $peridotParentScope
+     */
+    public function peridotSetParentScope($peridotParentScope)
+    {
+        $this->peridotParentScope = $peridotParentScope;
+        return $this;
     }
 
     /**
