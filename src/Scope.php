@@ -68,7 +68,10 @@ class Scope
      */
     public function peridotBindTo(callable $callable)
     {
-        return Closure::bind($callable, $this, $this);
+        if ($callable instanceof Closure) {
+            return Closure::bind($callable, $this, $this);
+        }
+        return $callable;
     }
 
     /**

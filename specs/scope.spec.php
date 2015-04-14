@@ -27,7 +27,7 @@ describe('Scope', function() {
     });
 
     describe('->peridotBindTo()', function() {
-        it('should bind a callable to the scope', function() {
+        it('should bind a Closure to the scope', function() {
             $callable = function() {
                 return $this->name;
             };
@@ -35,6 +35,15 @@ describe('Scope', function() {
             $bound = $scope->peridotBindTo($callable);
             $result = $bound();
             assert($result == "brian", "scope should have been bound to callable");
+        });
+
+        it('should return non closures', function () {
+            $callable = 'strpos';
+            $scope = new TestScope();
+
+            $bound = $scope->peridotBindTo($callable);
+
+            assert($bound === 'strpos');
         });
     });
 
