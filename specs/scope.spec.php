@@ -99,7 +99,7 @@ describe('Scope', function() {
         });
     });
 
-    context('when calling a mixed in property', function() {
+    context('when accessing a mixed in property', function() {
         it('should throw an exception when property not found', function() {
             $exception = null;
             try {
@@ -148,6 +148,41 @@ describe('Scope', function() {
                 assert($name === "brian", "expected result of TestScope::name");
                 assert($surname === "scaturro", "expected result of TestChildScope::surname");
             });
+        });
+    });
+
+    context('when calling a property directly on the scope', function() {
+        it('should throw an exception when property not found', function() {
+            $exception = null;
+            try {
+                $this->scope->nope();
+            } catch (\Exception $e) {
+                $exception = $e;
+            }
+            assert(!is_null($exception), 'exception should not be null');
+        });
+
+        it('should throw an exception when property not callable', function() {
+            $this->scope->name = "brian";
+            $exception = null;
+            try {
+                $this->scope->name();
+            } catch (\Exception $e) {
+                $exception = $e;
+            }
+            assert(!is_null($exception), 'exception should not be null');
+        });
+
+        it('should call the property when callable', function() {
+            $this->scope->callback = 'implode';
+            assert($this->scope->callback(['a', 'b']) === "ab", "callable property should be callable");
+        });
+
+        it('should bind the property to the scope before calling', function() {
+            $this->scope->callback = function () {
+                return $this;
+            };
+            assert($this->scope->callback() === $this->scope, "callable property should be bound");
         });
     });
 });

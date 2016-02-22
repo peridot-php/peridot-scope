@@ -82,6 +82,9 @@ class Scope
      */
     public function __call($name, $arguments)
     {
+        if (isset($this->$name) && is_callable($this->$name)) {
+            return call_user_func_array($this->peridotBindTo($this->$name), $arguments);
+        }
         list($result, $found) = $this->peridotScanChildren($this, function ($childScope, &$accumulator) use ($name, $arguments) {
             if (method_exists($childScope, $name)) {
                 $accumulator = [call_user_func_array([$childScope, $name], $arguments), true];
