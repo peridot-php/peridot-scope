@@ -136,6 +136,11 @@ class Scope
             $fn($childScope, $accumulator);
             $this->peridotScanChildren($childScope, $fn, $accumulator);
         }
+
+        if (empty($accumulator)) {
+            return [null, false];
+        }
+
         return $accumulator;
     }
 }
